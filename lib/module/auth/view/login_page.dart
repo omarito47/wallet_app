@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_app/global/components/custom_button.dart';
 import 'package:wallet_app/global/components/custom_text_field.dart';
 import 'package:wallet_app/global/services/auth/auth_service.dart';
 import 'package:wallet_app/global/utils/constant_helper.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -89,7 +91,10 @@ class _LoginPageState extends State<LoginPage> {
               height: ConstantHelper.sizex25,
             ),
             // login button
-            CustomButton(onTap: () => login(context), text: "Login"),
+            CustomButton(
+                onTap: () => login(context),
+                text: "Login",
+                backgroundColor: Color.fromARGB(255, 43, 119, 170)),
             SizedBox(
               height: ConstantHelper.sizex25,
             ),
@@ -113,6 +118,42 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: ConstantHelper.sizex25,
+            ),
+            // Sign in with google button
+            CustomButton(
+                onTap: () async {
+                  final GoogleSignInAccount? gUser =
+                      await GoogleSignIn().signIn();
+
+                  final GoogleSignInAuthentication gAuth =
+                      await gUser!.authentication;
+                  final credential = GoogleAuthProvider.credential(
+                    accessToken: gAuth.accessToken,
+                    idToken: gAuth.idToken,
+                  );
+                  await FirebaseAuth.instance
+                      .signInWithCredential(credential)
+                      .then((value) {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      //create a logic if the email is omartaamallah4@gmail.com go to welcome screen if not go to welcomescreen withn the email the user will sign in with
+                      print(
+                          "Info=====${FirebaseAuth.instance.currentUser!.email}");
+                      print(
+                          "Info=====${FirebaseAuth.instance.currentUser!.displayName}");
+                      print(
+                          "Info=====${FirebaseAuth.instance.currentUser!.phoneNumber}");
+                      print(
+                          "Info=====${FirebaseAuth.instance.currentUser!.photoURL}");
+                      print(
+                          "Info=====${FirebaseAuth.instance.currentUser!.metadata}");
+                    }
+                  });
+                },
+                text: "Sign in with    ",
+                imagePath: "assets/google_logo.png",
+                backgroundColor: Color.fromARGB(255, 186, 188, 188)),
           ],
         ),
       ),

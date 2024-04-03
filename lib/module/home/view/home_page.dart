@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wallet_app/global/components/app_drawer.dart';
 import 'package:wallet_app/module/home/controller/home_controller.dart';
 
-
-
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -17,15 +15,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.tertiary,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
         elevation: 0,
         centerTitle: true,
+         backgroundColor: Color(0xff648ddb),
         title: const Text("Home"),
       ),
-      body: Center(child: Text("${_homeController.authService.getCurrentUser()!.email}"),),
+      body: Center(
+        child: Text("${_homeController.authService.getCurrentUser()!.email}"),
+      ),
       drawer: const MyDrawer(),
     );
   }

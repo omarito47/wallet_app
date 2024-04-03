@@ -111,7 +111,7 @@ class RregisterStatePage extends State<RegisterPage> {
               height: ConstantHelper.sizex25,
             ),
             // register button
-            CustomButton(onTap: () => register(context), text: "Register"),
+            CustomButton(onTap: () => register(context), text: "Register",backgroundColor: Color.fromARGB(255, 43, 119, 170)),
             SizedBox(
               height: ConstantHelper.sizex25,
             ),

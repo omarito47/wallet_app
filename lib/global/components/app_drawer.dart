@@ -1,7 +1,5 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:image_picker/image_picker.dart';
 import 'package:wallet_app/global/services/auth/auth_service.dart';
@@ -9,6 +7,8 @@ import 'dart:io';
 
 import 'package:wallet_app/global/services/firebase/firebase_service.dart';
 import 'package:wallet_app/global/utils/constant_helper.dart';
+import 'package:wallet_app/module/home/view/home_page.dart';
+import 'package:wallet_app/module/profile/view/profile_page.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -59,14 +59,9 @@ class _MyDrawerState extends State<MyDrawer> {
   Future<void> _loadImageUrl() async {
     var userEmail = _authService.getCurrentUser()!.email;
 
-    final imageUrl = await _firebaseService.getImageFromFirebase(userEmail!);
-    if (imageUrl != null) {
-      setState(() {
-        _imageUrl = imageUrl;
-      });
-    }
+    _imageUrl = _authService.getCurrentUser()!.photoURL;
     setState(() {
-      userName = extractUsernameFromEmail(userEmail);
+      userName = extractUsernameFromEmail(userEmail!);
     });
   }
 
@@ -143,7 +138,33 @@ class _MyDrawerState extends State<MyDrawer> {
                   leading: Icon(Icons.home,
                       color: Theme.of(context).colorScheme.primary),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ));
+                  },
+                ),
+              ),
+               // Profile list tile
+              Padding(
+                padding: EdgeInsets.only(left: ConstantHelper.sizex25),
+                child: ListTile(
+                  title: Text(
+                    "P R O F I L E",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  leading: Icon(Icons.home,
+                      color: Theme.of(context).colorScheme.primary),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ));
                   },
                 ),
               ),
