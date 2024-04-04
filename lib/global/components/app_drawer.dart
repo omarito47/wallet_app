@@ -7,17 +7,18 @@ import 'dart:io';
 
 import 'package:wallet_app/global/services/firebase/firebase_service.dart';
 import 'package:wallet_app/global/utils/constant_helper.dart';
+import 'package:wallet_app/module/auth/view/login_or_register.dart';
 import 'package:wallet_app/module/home/view/home_page.dart';
 import 'package:wallet_app/module/profile/view/profile_page.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({super.key});
+class AppDrawer extends StatefulWidget {
+  const AppDrawer({super.key});
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<AppDrawer> createState() => _AppDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _AppDrawerState extends State<AppDrawer> {
   File? _imageFile;
   String? _imageUrl;
   final ImagePicker _picker = ImagePicker();
@@ -48,6 +49,10 @@ class _MyDrawerState extends State<MyDrawer> {
   void logout() {
     final _auth = AuthService();
     _auth.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginOrRegister()),
+    );
   } // Rest of the code...
 
   @override
