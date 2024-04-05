@@ -3,7 +3,9 @@ import 'package:wallet_app/global/components/app_drawer.dart';
 import 'package:wallet_app/global/components/card_info.dart';
 import 'package:wallet_app/global/model/card.dart';
 import 'package:wallet_app/global/model/transaction.dart';
+import 'package:wallet_app/global/theme/light_mode.dart';
 import 'package:wallet_app/global/utils/constant_helper.dart';
+import 'package:wallet_app/main.dart';
 import 'package:wallet_app/module/home/controller/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,6 +51,21 @@ class _HomePageState extends State<HomePage> {
       amount: 100.0,
       date: DateTime(2022, 3, 10),
     ),
+    Transaction(
+      receiverName: "Daniel",
+      amount: 100.0,
+      date: DateTime(2022, 3, 10),
+    ),
+    Transaction(
+      receiverName: "Jhonny",
+      amount: 100.0,
+      date: DateTime(2022, 3, 10),
+    ),
+    Transaction(
+      receiverName: "Ramsy",
+      amount: 100.0,
+      date: DateTime(2022, 3, 10),
+    ),
   ];
   List<String> typesCard = ["Visa", "Mastercard"];
   late String selectedCardType;
@@ -56,13 +73,23 @@ class _HomePageState extends State<HomePage> {
   String cardType = '';
   String cardBalance = '';
   bool isAddingCard = false;
+
+  late TextEditingController recipientController;
+  late TextEditingController amountController;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    setState(() {
-      selectedCardType = typesCard[0];
-    });
+    selectedCardType = typesCard[0];
+    recipientController = TextEditingController();
+    amountController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    recipientController.dispose();
+    amountController.dispose();
+    super.dispose();
   }
 
   void showAddCardDialog() {
@@ -78,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Card Balance',
                       ),
@@ -88,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     TextField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Card Number',
                       ),
@@ -166,11 +195,100 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
+  void transferMoney() {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text('Transfer Money'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      controller: recipientController,
+                      decoration: InputDecoration(
+                        labelText: 'Recipient Card',
+                      ),
+                    ),
+                    TextField(
+                      controller: amountController,
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    performTransfer();
+                  },
+                  child: Text('Transfer'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void performTransfer() {
+    String recipient = recipientController.text;
+    double amount = double.tryParse(amountController.text) ?? 0.0;
+
+    // Perform transfer logic here
+    // This is just a UI demonstration, so no actual transfer is happening
+
+    // Add the transaction to the list
+    setState(() {
+      staticData.add(
+        Transaction(
+          receiverName: recipient,
+          amount: amount,
+          date: DateTime.now(),
+        ),
+      );
+    });
+
+    // Close the dialog
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Switch(
+              value: themeProvider.selectedMode == ThemeModeOptions.Dark,
+              onChanged: (value) {
+                if (value) {
+                  themeProvider.setThemeMode(ThemeModeOptions.Dark);
+                } else {
+                  themeProvider.setThemeMode(ThemeModeOptions.Light);
+                }
+              },
+            ),
+          ),
+        ],
         title: Text('My wallet'),
       ),
       body: Column(
@@ -191,22 +309,49 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Flexible(
-            child:  ListView.builder(
-          itemCount: staticData.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(staticData[index].receiverName),
-              subtitle: Text('Amount: ${staticData[index].amount.toStringAsFixed(2)}'),
-              trailing: Text('Date: ${staticData[index].date.toString()}'),
-            );
-          },
-        ),
+            child: ListView.builder(
+              itemCount: staticData.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(ConstantHelper.sizex10),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(ConstantHelper.sizex16),
+                  ),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(staticData[index].receiverName),
+                      subtitle: Text(
+                          'Amount: ${staticData[index].amount.toStringAsFixed(2)}'),
+                      trailing: Text(
+                          'Date: ${staticData[index].date.year}-${staticData[index].date.month}-${staticData[index].date.day}'),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: showAddCardDialog,
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton(
+              onPressed: showAddCardDialog,
+              child: Icon(Icons.add),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton(
+              onPressed: transferMoney,
+              child: Icon(Icons.attach_money),
+            ),
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

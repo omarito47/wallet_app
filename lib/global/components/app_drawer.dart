@@ -151,7 +151,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                 ),
               ),
-               // Profile list tile
+              // Profile list tile
               Padding(
                 padding: EdgeInsets.only(left: ConstantHelper.sizex25),
                 child: ListTile(
@@ -174,33 +174,33 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
               ),
               // settings list tile
-              Padding(
-                padding: EdgeInsets.only(left: ConstantHelper.sizex25),
-                child: ListTile(
-                  title: Text(
-                    "S E T T I N G S",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  leading: Icon(Icons.settings,
-                      color: Theme.of(context).colorScheme.primary),
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const SettingsPage(),
-                    //     ));
-                  },
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(left: ConstantHelper.sizex25),
+              //   child: ListTile(
+              //     title: Text(
+              //       "S E T T I N G S",
+              //       style: TextStyle(
+              //         color: Theme.of(context).colorScheme.primary,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //     leading: Icon(Icons.settings,
+              //         color: Theme.of(context).colorScheme.primary),
+              //     onTap: () {
+              //       // Navigator.push(
+              //       //     context,
+              //       //     MaterialPageRoute(
+              //       //       builder: (context) => const SettingsPage(),
+              //       //     ));
+              //     },
+              //   ),
+              // ),
             ],
           ),
           // logout list tile
           Padding(
             padding: EdgeInsets.only(
-                left: ConstantHelper.sizex25, bottom: ConstantHelper.sizex25),
+                left: ConstantHelper.sizex25, bottom: ConstantHelper.sizex60),
             child: ListTile(
               title: Text(
                 "L O G O U T",
