@@ -1,16 +1,40 @@
-# wallet_app
+# Wallet app
 
-A new Flutter project.
+- This app is designed to provide a seamless onboarding experience and various features including Google Sign-In, user profile creation, wallet card display, transaction history, credit card management, money transfer, and app settings customization.
 
-## Getting Started
+## Installation
+- Clone the repository from GitHub.
+- Install the necessary dependencies by running npm install in the project directory.
+- Configure the required API keys and credentials for Google Sign-In in the project.
+- Build and run the app on your preferred platform using the appropriate commands.
+## Features
+- Onboarding Screens
 
-This project is a starting point for a Flutter application.
+- Google Sign-In
 
-A few resources to get you started if this is your first Flutter project:
+- User Profil information is extracted from the Google account.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### Home Page
+- The home page of the app displays a wallet card containing the user's information.
+- The wallet card provides a summary of the user's profile and relevant details.
+- A transaction history section is included below the wallet card, showing past transactions with sample data.
+- Credit Card Management
+- Users can add new credit cards to their account.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Transaction History
+
+#### Money Transfer
+A transfer money feature is developed in the app.
+Users can initiate a transfer by selecting recipients from a modal.
+Note: The money transfer feature is for UI purposes only and does not perform real transactions.
+
+## Usage
+- Launch the app on your preferred platform.
+- Follow the onboarding screens to get familiar with the features or skip directly to the last screen.
+- Sign in to the app using your Google account.
+- Your user profile will be created automatically using your Google account information.
+- Explore the home page to view your wallet card and transaction history.
+- Manage your credit cards by adding new ones.
+- Use the transaction history feature to review past transactions.
+- Initiate a money transfer by selecting recipients from the modal (UI only).
+
