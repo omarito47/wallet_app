@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wallet_app/global/model/content.dart';
-import 'package:wallet_app/module/auth/view/auth_gate.dart';
+
+import 'package:wallet_app/global/utils/global.dart';
 
 class Onboarding extends StatefulWidget {
   @override

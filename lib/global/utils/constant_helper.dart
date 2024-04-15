@@ -27,7 +27,7 @@ class ConstantHelper {
   static double sizex46 = 46.0;
   static double sizex48 = 48.0;
   static double sizex50 = 50.0;
-  // Add more sizes until sizex80
+
   static double sizex52 = 52.0;
   static double sizex54 = 54.0;
   static double sizex56 = 56.0;

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/global/components/custom_button.dart';
-import 'package:wallet_app/global/components/custom_text_field.dart';
 
-import 'package:wallet_app/global/services/auth/auth_service.dart';
-import 'package:wallet_app/global/utils/constant_helper.dart';
+import 'package:wallet_app/global/utils/global.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wallet_app/global/utils/constant_helper.dart';
-import 'package:wallet_app/module/auth/view/auth_gate.dart';
-import 'package:wallet_app/module/onbording/onbording.dart';
+
+import 'package:wallet_app/global/utils/global.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

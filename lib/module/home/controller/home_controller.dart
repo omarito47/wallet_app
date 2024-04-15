@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:wallet_app/global/services/auth/auth_service.dart';
-import 'package:wallet_app/global/services/firebase/firebase_service.dart';
+
+import 'package:wallet_app/global/utils/global.dart';
+
 class HomeController {
 
   final AuthService authService = AuthService();

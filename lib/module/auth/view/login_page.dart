@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wallet_app/global/components/custom_button.dart';
-import 'package:wallet_app/global/components/custom_text_field.dart';
-import 'package:wallet_app/global/services/auth/auth_service.dart';
-import 'package:wallet_app/global/utils/constant_helper.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:wallet_app/global/utils/global.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;

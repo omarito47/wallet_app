@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/global/components/app_drawer.dart';
-import 'package:wallet_app/global/components/card_info.dart';
-import 'package:wallet_app/global/model/card.dart';
-import 'package:wallet_app/global/model/transaction.dart';
-import 'package:wallet_app/global/theme/light_mode.dart';
-import 'package:wallet_app/global/utils/constant_helper.dart';
+
 import 'package:wallet_app/main.dart';
-import 'package:wallet_app/module/home/controller/home_controller.dart';
+
+import 'package:wallet_app/global/utils/global.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);

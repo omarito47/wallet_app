@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/module/auth/view/login_page.dart';
-import 'package:wallet_app/module/auth/view/register_page.dart';
 
+import 'package:wallet_app/global/utils/global.dart';
 
 class LoginOrRegister extends StatefulWidget {
   const LoginOrRegister({super.key});

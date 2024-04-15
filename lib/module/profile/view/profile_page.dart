@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_app/global/components/app_drawer.dart';
+
 import 'package:wallet_app/module/home/controller/home_controller.dart';
+import 'package:wallet_app/global/utils/global.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
